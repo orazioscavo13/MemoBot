@@ -9,6 +9,8 @@ import time
 import threading
 from threading import Timer
 
+TOKEN = "TOKEN"
+
 #enable logging, sfrutta la libreria per stampare i messaggi e gli errori, in questo caso stampa un messaggio di conferma all'avvio
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -28,7 +30,7 @@ def info(bot,update):
 
 #Funzione che viene eseguita ogni secondo, controllando nei vari file se ci sono notifiche da inviare a qualche utente
 def polling():
-	bot = telegram.Bot(token='TOKEN')
+	bot = telegram.Bot(token=TOKEN)
 	#timestamp attuale
 	adesso = time.time()
 	#rimuovo le cifre dopo la virgola
@@ -327,7 +329,7 @@ def show(bot,update):
 
 def main():
 	#inizializza l'oggetto updater sul nostro bot, di cui indichiamo il token, l'updater ha il compito di rilevare aggiornamenti dai server di telegram riguardanti messaggi inviati al bot
-	updater = Updater("TOKEN")
+	updater = Updater(TOKEN)
 	#inizializza l'oggetto dispatcher, che raccoglie gli aggiornamenti colti dall'updater e li gira a diversi handler in base al loro contenuto
 	dp=updater.dispatcher
 	dp.add_handler(CommandHandler('appuntamento',ask_date, pass_args=True))
